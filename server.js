@@ -2,14 +2,12 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
-
-
 //controllers
 const usersController = require('./controllers/users');
 
 //uses
 app.use('/users',usersController);
-app.use(methodOverride('_method'));
+app.use(bodyParser.urlencoded({extend:false}));
 
 //my home page 
 app.get('/', (req,res)=>{
