@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
+
 
 //controllers
 const usersController = require('./controllers/users');
@@ -8,6 +10,7 @@ const usersController = require('./controllers/users');
 //uses
 app.use('/users',usersController);
 app.use(bodyParser.urlencoded({extend:false}));
+app.use(methodOverride('method'));
 
 //my home page 
 app.get('/', (req,res)=>{
