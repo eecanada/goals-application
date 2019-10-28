@@ -5,7 +5,11 @@ const User = require('../models/users.js');
 
 //1.0
 router.get('/', (req,res)=>{
-  res.render('users/index.ejs')
+  User.find({}, (err, AllUsers)=>{
+    res.render('users/index.ejs', {
+        users: AllUsers
+    })
+  })
 });
 
 //1.1
