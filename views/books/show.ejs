@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <header> 
+    <h1>
+      Show page for <%=book.title%></h1>
+    </h1>
+    <nav> 
+      <ul>
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/books">Book Index</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <h2>
+        Book Description
+      </h2>
+      <ul>
+        <li> Title: <%=book.title%></li>
+        <li>Description: <%=book.caption%></li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>
