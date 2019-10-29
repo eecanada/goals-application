@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <header>
+   <h1> Books </h1>
+  <nav>
+    <ul>
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a href="books/new">Create a new Book</a>
+      </li>
+    </ul>
+  </nav>
+  </header>
+  <main>
+    <h2> List of Books</h2>
+    <ul>
+      <% for(let i = 0; i < books.length; i++) { %>
+        <li>
+          <img src="<%= books[i].url %>"> <%=books[i].title%> <%=books[i].caption%></a>
+        </li>
+       <% } %>
+    </ul>
+  </main>
+</body>
+</html>
