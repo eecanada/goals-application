@@ -5,8 +5,14 @@ const Book = require('../models/books.js')
 
 //1.0
 router.get('/', (req,res)=>{
-  res.render('users/index.ejs')
+  Book.find({}, (err, AllBooks)=>{
+    res.render('books/index.ejs', {
+        books: AllBooks
+    })
+  })
 });
+
+
 
 
 //1.1
@@ -25,5 +31,8 @@ router.post('/', (req,res)=>{
     }
   })
 });
+
+
+
 
 module.exports = router;
