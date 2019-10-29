@@ -9,12 +9,12 @@ const usersController = require('./controllers/users');
 
 require('./db/db');
 
-//uses
-app.use('/users',usersController);
-
 //middlewear
 app.use(bodyParser.urlencoded({extend:false}));
-app.use(methodOverride('method'));
+app.use(methodOverride('_method'));
+
+//uses
+app.use('/users',usersController);
 
 //my home page 
 app.get('/', (req,res)=>{

@@ -34,7 +34,7 @@ router.get('/:id', (req, res) => {
       res.send(err);
     } else {
       res.render('users/show.ejs', {
-        author: foundAuthor
+        user: foundUser
       });
     }
   })
@@ -61,20 +61,19 @@ router.get('/:id/edit', (req, res)=>{
     }else{
       res.render('users/edit.ejs', {
         user: foundUser
-      }
-		};
-	});
+      });
+	};
+});
 });
 
 
 //1.6 
 router.put('/:id', (req, res)=>{
-	User.findByIdAndUpdate(req.params.id, req.body, ()=>{
+	User.findByIdAndUpdate(req.params.id, req.body, (err, response)=>{
     if(err){
       res.send(err)
     }else{
-      res.redirect('/users');
-      
+      res.redirect('/users');  
     }
 	});
 });
