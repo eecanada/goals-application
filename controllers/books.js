@@ -40,6 +40,16 @@ router.get('/:id', (req,res)=>{
   })
 });
 
+//1.4 
+router.delete('/:id', (req,res)=>{
+  Book.findByIdAndRemove(req.params.id,()=>{
+    res.redirect('/books')
+  })
+});
+
+
+
+
 
 
 
