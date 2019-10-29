@@ -14,4 +14,16 @@ router.get('/new', (req,res)=>{
   res.render('books/new.ejs')
   });
 
+
+//1.2
+router.post('/', (req,res)=>{
+  Book.create(req.body, (err, createdBook)=>{
+    if(err){
+      console.log(err);
+    }else{
+      res.redirect('/books')
+    }
+  })
+});
+
 module.exports = router;
