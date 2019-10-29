@@ -15,9 +15,17 @@ router.get('/', async (req,res)=>{
 })
 
 //1.1
-router.get('/new', (req,res)=>{
-  res.render('books/new.ejs')
-  });
+router.get('/new', async (req,res)=>{
+  try{
+    res.render('books/new.ejs', {
+  })
+  } catch (err) {
+    res.send(err)
+  }
+  })
+
+
+
 
   //1.2
 router.post('/', (req,res)=>{
