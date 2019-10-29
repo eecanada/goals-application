@@ -6,6 +6,7 @@ const methodOverride = require('method-override');
 
 //controllers
 const usersController = require('./controllers/users');
+const booksController = require('./controllers/books');
 
 require('./db/db');
 
@@ -15,6 +16,7 @@ app.use(methodOverride('_method'));
 
 //uses
 app.use('/users',usersController);
+app.use('/books',booksController);
 
 //my home page 
 app.get('/', (req,res)=>{
