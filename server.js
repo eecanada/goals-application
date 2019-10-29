@@ -10,7 +10,7 @@ const booksController = require('./controllers/books');
 
 require('./db/db');
 
-//middlewear
+//middleware
 app.use(bodyParser.urlencoded({extend:false}));
 app.use(methodOverride('_method'));
 
