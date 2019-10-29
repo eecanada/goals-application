@@ -43,8 +43,12 @@ router.get('/:id', (req, res) => {
 
 //1.4 
 router.delete('/:id', (req, res)=>{
-	User.findByIdAndRemove(req.params.id, ()=>{
-		res.redirect('/users');
+	User.findByIdAndRemove(req.params.id, (err, response)=>{
+    if(err){
+      res.send(err)
+    } else {
+      res.redirect('/users');
+    }
 	});
 });
 
