@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<header>
+			<h1>Edit <%=user.username%>'s Info</h1>
+			<nav>
+				<ul>
+					<li>
+						<a href="/">Home</a>
+					</li>
+					<li>
+						<a href="/users">User Index</a>
+					</li>
+				</ul>
+			</nav>
+		</header>
+		<main>
+			<h2>Author Attributes:</h2>
+			<form action="/users/<%=user._id%>?_method=PUT" method="post">
+				<input type="text" name="username" value="<%=user.username%>"/><br/>
+				<input type="submit" value="Update User"/>
+			</form>
+		</main>
+	</body>
+</html>
