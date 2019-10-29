@@ -8,7 +8,7 @@
 </head>
 <body>
   <header>
-   <h1> Books </h1>
+   <h1> Books Index </h1>
   <nav>
     <ul>
       <li>
@@ -25,10 +25,11 @@
     <ul>
       <% for(let i = 0; i < books.length; i++) { %>
         <li>
-          <img src="<%= books[i].url %>"> <%=books[i].title%> <%=books[i].caption%></a>
+          <a href="/books/<%= books[i]._id%>"><%=books[i].title%></a>
         </li>
-       <% } %>
+      <% } %>
     </ul>
   </main>
 </body>
 </html>
+
