@@ -3,13 +3,16 @@ const router = express.Router();
 const Book = require('../models/books.js')
 
 //1.0
-router.get('/', (req,res)=>{
-  Book.find({}, (err, AllBooks)=>{
+router.get('/', async (req,res)=>{
+  try{
+    const allBooks = await Book.find({})
     res.render('books/index.ejs', {
-        books: AllBooks
+      books: allBooks
     })
-  })
-});
+  } catch(err){
+    res.send(err);
+  }
+})
 
 //1.1
 router.get('/new', (req,res)=>{
