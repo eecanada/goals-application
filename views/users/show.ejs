@@ -27,6 +27,11 @@
             <li>Username: <%=user.username%></li>
           </ul>
         </section>
+        <section>
+            <form action="/users/<%=user._id%>?_method=DELETE" method="post">
+                <input type="submit" value="Delete User"/>
+            </form>
+        </section>
       </main>
 </body>
 </html>
