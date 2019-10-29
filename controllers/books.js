@@ -47,7 +47,6 @@ router.delete('/:id', (req,res)=>{
   })
 });
 
-
 //1.5 
 router.get('/:id/edit',(req,res)=>{
   Book.findById(req.params.id, (err,foundBook)=>{
@@ -61,7 +60,15 @@ router.get('/:id/edit',(req,res)=>{
   })
 });
 
-
-
+//1.6
+router.get('/id', (req,res)=>{
+  Book.findByIdAndUpdate(req.params.id, req.body,(err, response)=>{
+    if(err){
+      res.send(err)
+    }else{
+      res.redirect('/books')
+    }
+  })
+});
 
 module.exports = router;
