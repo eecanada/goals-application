@@ -48,7 +48,18 @@ router.delete('/:id', (req,res)=>{
 });
 
 
-
+//1.5 
+router.get('/:id/edit',(req,res)=>{
+  Book.findById(req.params.id, (err,foundBook)=>{
+    if(err){
+      res.send(err);
+    }else{
+      res.render('book/edit.ejs',{
+        book: foundBook
+      })
+    }
+  })
+});
 
 
 
