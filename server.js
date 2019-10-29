@@ -7,8 +7,12 @@ const methodOverride = require('method-override');
 //controllers
 const usersController = require('./controllers/users');
 
+require('./db/db');
+
 //uses
 app.use('/users',usersController);
+
+//middlewear
 app.use(bodyParser.urlencoded({extend:false}));
 app.use(methodOverride('method'));
 
