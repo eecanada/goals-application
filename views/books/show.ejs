@@ -32,6 +32,11 @@
         <li>Description: <%=book.caption%></li>
       </ul>
     </section>
+    <section>
+      <form action="/books/<%=book._id%>?_method=DELETE" method="post">
+          <input type="submit" value="Delete Book"/>
+      </form>
+  </section>
   </main>
 </body>
 </html>
