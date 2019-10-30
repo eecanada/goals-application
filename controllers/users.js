@@ -23,7 +23,6 @@ router.get('/new', async (req,res)=>{
   }
 })
 
-
 //1.2
 router.post('/', async (req,res)=>{
   try{
@@ -33,7 +32,6 @@ router.post('/', async (req,res)=>{
     res.send(err)
   }
 });
-
 
 //1.3
 router.get('/:id', async (req,res)=>{
@@ -57,7 +55,6 @@ router.delete('/:id', async (req, res)=>{
   }
 })
 
-
 //1.5 
 router.get('/:id/edit', async (req,res)=>{
   try{
@@ -70,17 +67,14 @@ router.get('/:id/edit', async (req,res)=>{
   }
 });
 
-
-
 //1.6 
-router.put('/:id', (req, res)=>{
-	User.findByIdAndUpdate(req.params.id, req.body, (err, response)=>{
-    if(err){
-      res.send(err)
-    }else{
-      res.redirect('/users');  
-    }
-	});
-});
+router.put('/:id', async (req,res)=>{
+  try{
+    const updatedUser = await User.findByIdAndUpdate(req.params.id, req.body, {new:true});
+    res.redirect('/users')
+  } catch (err){
+    res.send(err)
+  }
+})
 
 module.exports = router; 
