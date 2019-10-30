@@ -36,17 +36,16 @@ router.post('/', async (req,res)=>{
 
 
 //1.3 
-router.get('/:id', (req,res)=>{
-  Book.findById(req.params.id, (err, foundBook)=>{
-    if(err){
-      res.send(err)
-    }else{
-      res.render('books/show.ejs',{
-        book: foundBook
-      })
-    }
-  })
-});
+router.get('/:id', async (req,res)=>{
+  try{
+    const foundBook = await Book.findById(req.params.id)
+    res.render('books/show.ejs', {
+      book: foundBook
+    })
+  } catch (err){
+    res.send(err);
+  }
+})
 
 //1.4 
 router.delete('/:id', (req,res)=>{
