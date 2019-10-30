@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Book = require('../models/books.js');
+const User = require('../models/users.js');
 
 //1.0
 router.get('/', async (req,res)=>{
