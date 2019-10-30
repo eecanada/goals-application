@@ -25,17 +25,6 @@ router.get('/new', async (req,res)=>{
 
 
 //1.2
-router.post('/', (req,res)=>{
-  User.create(req.body, (err,createdUser)=>{
-    if(err){
-      console.log(err);
-    }else{
-      res.redirect('/users')
-    }
-  });
-});
-
-//1.3
 router.post('/', async (req,res)=>{
   try{
     const createdUser = await User.create(req.body)
@@ -43,22 +32,20 @@ router.post('/', async (req,res)=>{
   } catch(err){
     res.send(err)
   }
-})
+});
 
 
 //1.3
-router.get('/:id', (req, res) => {
-  User.findById(req.params.id, (err, foundUser) => {
-    if(err){
-      res.send(err);
-    } else {
-      res.render('users/show.ejs', {
-        user: foundUser
-      });
-    }
-  })
-});
-
+router.get('/:id', async (req,res)=>{
+  try{
+    const foundUser = await User.findById(req.params.id)
+    res.render('users/show.ejs', {
+      user: foundUser
+    })
+  } catch (err){
+    res.send(err)
+  }
+})
 
 //1.4 
 router.delete('/:id', (req, res)=>{
