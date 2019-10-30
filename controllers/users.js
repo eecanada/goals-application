@@ -59,17 +59,17 @@ router.delete('/:id', async (req, res)=>{
 
 
 //1.5 
-router.get('/:id/edit', (req, res)=>{
-	User.findById(req.params.id, (err, foundUser)=>{
-    if(err){
-      res.send(err);
-    }else{
-      res.render('users/edit.ejs', {
-        user: foundUser
-      });
-	};
+router.get('/:id/edit', async (req,res)=>{
+  try{
+    const foundUser = await User.findById(req.params.id)
+    res.render('users/edit.ejs', {
+      user: foundUser
+    })
+  } catch (err){
+    res.send(err)
+  }
 });
-});
+
 
 
 //1.6 
