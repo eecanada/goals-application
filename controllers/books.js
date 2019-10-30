@@ -60,21 +60,20 @@ router.delete('/:id', async (req,res)=>{
 
 
 
-//1.5 
-router.get('/:id/edit',(req,res)=>{
-  Book.findById(req.params.id, (err,foundBook)=>{
-    if(err){
-      res.send(err);
-    }else{
-      res.render('book/edit.ejs',{
-        book: foundBook
-      })
-    }
-  })
-});
+//1.5 EDITING
+router.get('/:id/edit', async (req,res)=>{
+  try{
+    const foundBook = await Book.findById(req.params.id)
+    res.render('books/edit.ejs', {
+      book: foundBook
+    })
+  } catch (err){
+    res.send(err)
+  }
+})
 
 //1.6
-router.get('/id', (req,res)=>{
+router.put('/:id', (req,res)=>{
   Book.findByIdAndUpdate(req.params.id, req.body,(err, response)=>{
     if(err){
       res.send(err)
