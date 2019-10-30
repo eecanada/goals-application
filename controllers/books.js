@@ -24,19 +24,16 @@ router.get('/new', async (req,res)=>{
   }
   })
 
+//1.2 
+router.post('/', async (req,res)=>{
+  try{
+    const CreatedBook = await Book.create(req.body)
+    res.redirect('/books')
+  } catch (err){
+    res.send(err)
+  }
+})
 
-
-
-  //1.2
-router.post('/', (req,res)=>{
-  Book.create(req.body, (err, createdBook)=>{
-    if(err){
-      console.log(err);
-    }else{
-      res.redirect('/books')
-    }
-  })
-});
 
 //1.3 
 router.get('/:id', (req,res)=>{
