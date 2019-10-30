@@ -30,7 +30,11 @@ router.get('/new', async (req,res)=>{
 //1.2 
 router.post('/', async (req,res)=>{
   try{
-    const CreatedBook = await Book.create(req.body)
+    const createdBook = await Book.create(req.body)
+    const foundUser = await User.findById(req.body.userId)
+    const [findUser, createBook] = await ([foundUser,createdBook]);
+    findUser.books.push(createBook);
+    await findUser.save();
     res.redirect('/books')
   } catch (err){
     res.send(err)
