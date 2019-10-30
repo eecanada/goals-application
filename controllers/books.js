@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Book = require('../models/books.js')
+const Book = require('../models/books.js');
 
 //1.0
 router.get('/', async (req,res)=>{
@@ -12,7 +12,7 @@ router.get('/', async (req,res)=>{
   } catch(err){
     res.send(err);
   }
-})
+});
 
 //1.1
 router.get('/new', async (req,res)=>{
@@ -22,64 +22,64 @@ router.get('/new', async (req,res)=>{
   } catch (err) {
     res.send(err)
   }
-  })
+  });
 
-
-
-
-  //1.2
-router.post('/', (req,res)=>{
-  Book.create(req.body, (err, createdBook)=>{
-    if(err){
-      console.log(err);
-    }else{
-      res.redirect('/books')
-    }
-  })
+//1.2 
+router.post('/', async (req,res)=>{
+  try{
+    const CreatedBook = await Book.create(req.body)
+    res.redirect('/books')
+  } catch (err){
+    res.send(err)
+  }
 });
 
+
 //1.3 
-router.get('/:id', (req,res)=>{
-  Book.findById(req.params.id, (err, foundBook)=>{
-    if(err){
-      res.send(err)
-    }else{
-      res.render('books/show.ejs',{
-        book: foundBook
-      })
-    }
-  })
+router.get('/:id', async (req,res)=>{
+  try{
+    const foundBook = await Book.findById(req.params.id)
+    res.render('books/show.ejs', {
+      book: foundBook
+    })
+  } catch (err){
+    res.send(err)
+  }
 });
 
 //1.4 
-router.delete('/:id', (req,res)=>{
-  Book.findByIdAndRemove(req.params.id,()=>{
+router.delete('/:id', async (req,res)=>{
+  try{
+    const deletedBook = await Book.findByIdAndRemove(req.params.id)
     res.redirect('/books')
-  })
+  } catch(err){
+    res.send(err)
+  }
 });
+
+
+
 
 //1.5 
-router.get('/:id/edit',(req,res)=>{
-  Book.findById(req.params.id, (err,foundBook)=>{
-    if(err){
-      res.send(err);
-    }else{
-      res.render('book/edit.ejs',{
-        book: foundBook
-      })
-    }
-  })
-});
+router.get('/:id/edit', async (req,res)=>{
+  try{
+    const foundBook = await Book.findById(req.params.id)
+    res.render('books/edit.ejs', {
+      book: foundBook
+    })
+  } catch (err){
+    res.send(err)
+  }
+})
 
 //1.6
-router.get('/id', (req,res)=>{
-  Book.findByIdAndUpdate(req.params.id, req.body,(err, response)=>{
-    if(err){
-      res.send(err)
-    }else{
-      res.redirect('/books')
-    }
-  })
-});
+router.put('/:id', async (req,res)=>{
+  try{
+    const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, {new:true});
+    res.redirect('/books')
+  } catch (err){
+    res.send(err)
+  }
+})
 
 module.exports = router;
