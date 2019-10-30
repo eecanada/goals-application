@@ -18,7 +18,9 @@ router.get('/', async (req,res)=>{
 //1.1
 router.get('/new', async (req,res)=>{
   try{
+    const allAuthors = await Author.find({})
     res.render('books/new.ejs', {
+      authors: allAuthors
   })
   } catch (err) {
     res.send(err)
