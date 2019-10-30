@@ -39,20 +39,23 @@ router.post('/', async (req,res)=>{
   } catch (err){
     res.send(err)
   }
-});
+});  
 
 
 //1.3 
 router.get('/:id', async (req,res)=>{
   try{
-    const foundBook = await Book.findById(req.params.id)
+    const foundUser = await User.findOne({'books': req.params.id})
+    .populate('books')
+    .exec()
     res.render('books/show.ejs', {
-      book: foundBook
+      user: foundUser,
+      book: foundUser.books[0]
     })
-  } catch (err){
+  } catch(err){
     res.send(err)
   }
-});
+})
 
 //1.4 
 router.delete('/:id', async (req,res)=>{

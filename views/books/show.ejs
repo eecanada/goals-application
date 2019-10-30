@@ -9,7 +9,7 @@
 <body>
   <header> 
     <h1>
-      Show page for <%=book.title%></h1>
+      Show page for Book</h1>
     </h1>
     <nav> 
       <ul>
@@ -23,6 +23,8 @@
     </nav>
   </header>
   <main>
+      <h1><%=book.title%></h1>
+      <small>by: <a href="/users/<%=user._id%>"><%=user.username%></a></small>
     <section>
       <h2>
         Book Description
