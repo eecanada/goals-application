@@ -18,9 +18,9 @@ router.get('/', async (req,res)=>{
 //1.1
 router.get('/new', async (req,res)=>{
   try{
-    const allAuthors = await Author.find({})
+    const allUsers = await User.find({})
     res.render('books/new.ejs', {
-      authors: allAuthors
+      users: allUsers
   })
   } catch (err) {
     res.send(err)
