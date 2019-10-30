@@ -60,7 +60,7 @@ router.delete('/:id', async (req,res)=>{
 
 
 
-//1.5 EDITING
+//1.5 
 router.get('/:id/edit', async (req,res)=>{
   try{
     const foundBook = await Book.findById(req.params.id)
@@ -73,14 +73,13 @@ router.get('/:id/edit', async (req,res)=>{
 })
 
 //1.6
-router.put('/:id', (req,res)=>{
-  Book.findByIdAndUpdate(req.params.id, req.body,(err, response)=>{
-    if(err){
-      res.send(err)
-    }else{
-      res.redirect('/books')
-    }
-  })
-});
+router.put('/:id', async (req,res)=>{
+  try{
+    const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, {new:true});
+    res.redirect('/books')
+  } catch (err){
+    res.send(err)
+  }
+})
 
 module.exports = router;
