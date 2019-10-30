@@ -36,6 +36,17 @@ router.post('/', (req,res)=>{
 });
 
 //1.3
+router.post('/', async (req,res)=>{
+  try{
+    const createdUser = await User.create(req.body)
+    res.redirect('/users')
+  } catch(err){
+    res.send(err)
+  }
+})
+
+
+//1.3
 router.get('/:id', (req, res) => {
   User.findById(req.params.id, (err, foundUser) => {
     if(err){
