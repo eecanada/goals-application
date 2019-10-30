@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Book = require('../models/books.js')
+const Book = require('../models/books.js');
 
 //1.0
 router.get('/', async (req,res)=>{
@@ -12,7 +12,7 @@ router.get('/', async (req,res)=>{
   } catch(err){
     res.send(err);
   }
-})
+});
 
 //1.1
 router.get('/new', async (req,res)=>{
@@ -22,7 +22,7 @@ router.get('/new', async (req,res)=>{
   } catch (err) {
     res.send(err)
   }
-  })
+  });
 
 //1.2 
 router.post('/', async (req,res)=>{
@@ -32,7 +32,7 @@ router.post('/', async (req,res)=>{
   } catch (err){
     res.send(err)
   }
-})
+});
 
 
 //1.3 
@@ -43,16 +43,22 @@ router.get('/:id', async (req,res)=>{
       book: foundBook
     })
   } catch (err){
-    res.send(err);
+    res.send(err)
   }
-})
+});
 
 //1.4 
-router.delete('/:id', (req,res)=>{
-  Book.findByIdAndRemove(req.params.id,()=>{
+router.delete('/:id', async (req,res)=>{
+  try{
+    const deletedBook = await Book.findByIdAndRemove(req.params.id)
     res.redirect('/books')
-  })
+  } catch(err){
+    res.send(err)
+  }
 });
+
+
+
 
 //1.5 
 router.get('/:id/edit',(req,res)=>{
