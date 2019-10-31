@@ -2,8 +2,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
-
-
+const session = require('express-sessions');
 
 //controllers
 const usersController = require('./controllers/users');
@@ -14,6 +13,11 @@ require('./db/db');
 //middleware
 app.use(bodyParser.urlencoded({extend:false}));
 app.use(methodOverride('_method'));
+app.use(session({
+  secret: "this is a random secret string", 
+  resave: false, 
+  saveUninitialized: false 
+}));
 
 //uses
 app.use('/users',usersController);

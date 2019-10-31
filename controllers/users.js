@@ -4,6 +4,7 @@ const User = require('../models/users.js');
 const Book = require('../models/books.js');
 const bcrypt = require('bcryptjs');
 
+
 //1.0
 router.get('/', async (req,res)=>{
   try{
@@ -63,12 +64,6 @@ router.delete('/:id', async (req,res)=>{
   }
 })
 
-
-
-
-
-
-
 //1.5 
 router.get('/:id/edit', async (req,res)=>{
   try{
@@ -89,6 +84,36 @@ router.put('/:id', async (req,res)=>{
   } catch (err){
     res.send(err)
   }
+})
+
+// registration route 
+router.post('/registration', async (req, res) => {
+  
+  try { 
+    const foundUser = await User.findOne({username:req.body.username});
+    if(foundUser){
+      req.session.message = 'Username or password is incorrect';
+      res.redirect('/')
+    } else {
+      const password = req.body.password; 
+      const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+
+      const userDbEntry = {};
+      userDbEntry.username = req.body.username;
+
+      userDbEntry.password = passwordHash;
+      userDbEntry.email    = req.body.email;
+
+      const createdUser = await User.create(userDbEntry);
+      console.log(createdUser)
+      req.session.username = createdUser.username;
+      req.session.logged = true;
+      
+    }
+    
+  } catch(err) {
+      console.log(err)
+    }
 })
 
 module.exports = router; 
