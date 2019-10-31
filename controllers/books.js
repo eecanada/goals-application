@@ -46,7 +46,7 @@ router.post('/', async (req,res)=>{
 router.get('/:id', async (req,res)=>{
   try{
     const foundUser = await User.findOne({'books': req.params.id})
-    .populate('books')
+    .populate({path: 'book', match:{_id: req.params.id}})
     .exec()
     res.render('books/show.ejs', {
       user: foundUser,
@@ -57,12 +57,12 @@ router.get('/:id', async (req,res)=>{
   }
 })
 
-//1.4 /////////////////////////////////////////////////
+//1.4 
 router.delete('/:id', async (req,res)=>{
   try{
     const deleteBook = await Book.findByIdAndRemove(req.params.id)
     const foundUser = await User.findOne({'books': req.params.id})
-    foundUser.books.remove(req.params.id);
+    foundUser.books.remove(deleteBook);
     foundUser.save((err, updatedUser) => {
       res.redirect('/books')
     })
