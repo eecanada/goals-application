@@ -35,6 +35,16 @@
         <li>Description: <%=book.caption%></li>
       </ul>
     </section>
+   
+    <section>
+        <h2>Book List By This User:</h2>
+        <ul>
+            <% for(let i = 0; i < user.books.length; i++){ %>
+                <li><a href="/books/<%=user.books[i]._id%>"><%=user.books[i].title%></a></li>
+            <% } %>
+        </ul>
+    </section>
+    
     <section>
       <form action="/books/<%=book._id%>?_method=DELETE" method="post">
           <input type="submit" value="Delete Book"/>
