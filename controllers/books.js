@@ -46,8 +46,8 @@ router.post('/', async (req,res)=>{
 router.get('/:id', async (req,res)=>{
   try{
     const foundUser = await User.findOne({'books': req.params.id})
-    .populate({path: 'book', match:{_id: req.params.id}})
-    .exec()
+    .populate({path: 'books', match:{_id: req.params.id}})
+    console.log(foundUser)
     res.render('books/show.ejs', {
       user: foundUser,
       book: foundUser.books[0]

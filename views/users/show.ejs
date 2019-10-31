@@ -24,7 +24,14 @@
         <section>
           <h2>User Attributes:</h2>
           <ul>
-            <li>Username: <%=user.username%></li>
+            <li>User: <%=user.username%></li>
+            <!-- <li>User: <%=user.books %></li> -->
+
+            <ul>
+                <% for(let i = 0; i < user.books.length; i++){ %>
+                    <li><a href="/books/<%=user.books[i]._id%>"><%=user.books[i].title%></a></li>
+                <% } %>
+            </ul>
           </ul>
         </section>
         <section>

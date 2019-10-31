@@ -38,7 +38,6 @@ router.get('/:id', async (req, res)=>{
   try{
     const foundUser = await User.findById(req.params.id)
     .populate({path:'books'})
-    .exec()
     res.render('users/show.ejs', {
       user: foundUser
     })
