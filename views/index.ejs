@@ -9,6 +9,12 @@
 <body>
     <header>
         <h1>Goal Loops</h1>
+        <% if(!user) { %> 
+          <a href="/login">Login</a>
+          <a href="/registration">Register</a>
+        <% } else { %> 
+          <a href='users/logout'>Log Out</a>
+        <% } %> 
         <nav>
           <ul>
             <li>
@@ -17,9 +23,13 @@
             <li>
               <a href="/books">Books</a>
             </li>
+
           </ul>
         </nav>
       </header>
+      <header><%= message %></header>
+
+
   
 </body>
 </html>
