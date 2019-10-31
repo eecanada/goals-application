@@ -13,6 +13,7 @@ const booksController = require('./controllers/books');
 require('./db/db');
 
 //middleware
+app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extend:false}));
 app.use(methodOverride('_method'));
 
