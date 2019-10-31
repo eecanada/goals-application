@@ -57,18 +57,19 @@ router.get('/:id', async (req,res)=>{
   }
 })
 
-//1.4 
+//1.4 /////////////////////////////////////////////////
 router.delete('/:id', async (req,res)=>{
   try{
-    const deletedBook = await Book.findByIdAndRemove(req.params.id)
-    res.redirect('/books')
-  } catch(err){
+    const deleteBook = await Book.findByIdAndRemove(req.params.id)
+    const foundUser = await User.findOne({'books': req.params.id})
+    foundUser.books.remove(req.params.id);
+    foundUser.save((err, updatedUser) => {
+      res.redirect('/books')
+    })
+  } catch (err){
     res.send(err)
   }
-});
-
-
-
+})
 
 //1.5 
 router.get('/:id/edit', async (req,res)=>{
