@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/users.js');
-
+const Book = require('../models/books.js');
 //1.0
 router.get('/', async (req,res)=>{
   try{
@@ -34,9 +34,10 @@ router.post('/', async (req,res)=>{
 });
 
 //1.3
-router.get('/:id', async (req,res)=>{
+router.get('/:id', async (req, res)=>{
   try{
     const foundUser = await User.findById(req.params.id)
+    .populate({path:'books'})
     res.render('users/show.ejs', {
       user: foundUser
     })
@@ -45,15 +46,26 @@ router.get('/:id', async (req,res)=>{
   }
 })
 
-//1.4 
-router.delete('/:id', async (req, res)=>{
+// 1.4
+router.delete('/:id', async (req,res)=>{
   try{
     const deletedUser = await User.findByIdAndRemove(req.params.id)
-    res.redirect('/users')
+    await Book.deleteMany({
+      _id:{
+        $in: deletedUser.books
+      }
+    })
+    res.redirect('/books')
   } catch (err){
     res.send(err)
   }
 })
+
+
+
+
+
+
 
 //1.5 
 router.get('/:id/edit', async (req,res)=>{

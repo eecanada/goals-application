@@ -19,12 +19,18 @@
 			</nav>
 		</header>
 		<main>
-			<form action="/books" method="POST">
-				<input type="text" placeholder="img url" name="img" />
-				<input type="text" placeholder="title" name="title" />
-				<input type="text" placeholder="description" name="caption" />
-				<button type='submit'>Create New Book</button>
-			</form>
+			<form action="/books" method="post">
+				<select name="userId">
+						<% for(let i = 0; i < users.length; i++) { %>
+								<option value="<%=users[i]._id%>"><%=users[i].username%></option>
+						<% } %>
+				</select><br/>
+				<input type="text" placeholder="Category" name="improvement" /><br/>
+				<input type="text" placeholder="img url" name="img" /><br/>
+				<input type="text" placeholder="Title"  name="title" /><br/>
+				<input type="text" placeholder="Description"  name="caption" /><br/>
+				<input type="submit" value="Post Book"/>
+		</form>
 		</main>
 	</body>
 </html>

@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Book = require('../models/books.js');
+const User = require('../models/users.js');
 
 //1.0
 router.get('/', async (req,res)=>{
@@ -17,7 +18,9 @@ router.get('/', async (req,res)=>{
 //1.1
 router.get('/new', async (req,res)=>{
   try{
+    const allUsers = await User.find({})
     res.render('books/new.ejs', {
+      users: allUsers
   })
   } catch (err) {
     res.send(err)
@@ -27,38 +30,46 @@ router.get('/new', async (req,res)=>{
 //1.2 
 router.post('/', async (req,res)=>{
   try{
-    const CreatedBook = await Book.create(req.body)
+    const createdBook = await Book.create(req.body)
+    const foundUser = await User.findById(req.body.userId)
+    const [findUser, createBook] = await ([foundUser,createdBook]);
+    findUser.books.push(createBook);
+    await findUser.save();
     res.redirect('/books')
   } catch (err){
     res.send(err)
   }
-});
+});  
 
 
 //1.3 
 router.get('/:id', async (req,res)=>{
   try{
-    const foundBook = await Book.findById(req.params.id)
+    const foundUser = await User.findOne({'books': req.params.id})
+    .populate({path: 'books', match:{_id: req.params.id}})
+    console.log(foundUser)
     res.render('books/show.ejs', {
-      book: foundBook
+      user: foundUser,
+      book: foundUser.books[0]
     })
-  } catch (err){
+  } catch(err){
     res.send(err)
   }
-});
+})
 
 //1.4 
 router.delete('/:id', async (req,res)=>{
   try{
-    const deletedBook = await Book.findByIdAndRemove(req.params.id)
-    res.redirect('/books')
-  } catch(err){
+    const deleteBook = await Book.findByIdAndRemove(req.params.id)
+    const foundUser = await User.findOne({'books': req.params.id})
+    foundUser.books.remove(deleteBook);
+    foundUser.save((err, updatedUser) => {
+      res.redirect('/books')
+    })
+  } catch (err){
     res.send(err)
   }
-});
-
-
-
+})
 
 //1.5 
 router.get('/:id/edit', async (req,res)=>{
