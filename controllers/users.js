@@ -47,15 +47,26 @@ router.get('/:id', async (req, res)=>{
   }
 })
 
-//1.4 
-router.delete('/:id', async (req, res)=>{
+// 1.4
+router.delete('/:id', async (req,res)=>{
   try{
     const deletedUser = await User.findByIdAndRemove(req.params.id)
-    res.redirect('/users')
+    await Book.deleteMany({
+      _id:{
+        $in: deletedUser.books
+      }
+    })
+    res.redirect('/books')
   } catch (err){
     res.send(err)
   }
 })
+
+
+
+
+
+
 
 //1.5 
 router.get('/:id/edit', async (req,res)=>{
