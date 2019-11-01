@@ -1,48 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+  <title>Books</title>
 </head>
-<body>
+<body >
   <header> 
     <h1>
-      Show page for Book</h1>
+      <!-- Show page for Book</h1> -->
     </h1>
     <nav> 
       <ul>
         <li>
-          <a href="/">Home</a>
+          <!-- <a href="/">Home</a> -->
         </li>
         <li>
-          <a href="/books">Book Index</a>
+          <!-- <a href="/books">Book Index</a> -->
         </li>
       </ul>
     </nav>
   </header>
   <main>
-      <h1><%=book.title%></h1>
-      <small>by: <a href="/users/<%=user._id%>"><%=user.username%></a></small>
+    <div class="book">
+      <!-- <h1><%=book.title%></h1> -->
+      <large><a href="/users/<%=user._id%>"><%=user.username%>'s' Book Selection</a></large>
     <section>
       <h2>
-        Book Description
+        <!-- Book Description -->
       </h2>
+      <img class="bookimg" src="<%=book.img%>">
       <ul>
-        <li> <img src="<%=book.img%>"</li>
         <li> Title: <%=book.title%></li>
         <li>Description: <%=book.caption%></li>
       </ul>
+    <div>
     </section>
+
    
     <section>
-        <h2>Book List By This User:</h2>
+        <!-- <h2>Book List By This User:</h2>
         <ul>
             <% for(let i = 0; i < user.books.length; i++){ %>
                 <li><a href="/books/<%=user.books[i]._id%>"><%=user.books[i].title%></a></li>
             <% } %>
-        </ul>
+        </ul> -->
     </section>
     
     <section>
