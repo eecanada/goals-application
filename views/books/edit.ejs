@@ -1,24 +1,22 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="utf-8">
-		<title></title>
+<%- include('../partials/header.ejs') %>
+<%- include('../partials/navbar.ejs') %>
+		<title>Edit</title>
 	</head>
 	<body>
 		<header>
 			<h1>Edit <%=book.title%>'s Info</h1>
 			<nav>
-				<ul>
+				<!-- <ul>
 					<li>
 						<a href="/">Home</a>
 					</li>
 					<li>
 						<a href="/books">Book Index</a>
 					</li>
-				</ul>
+				</ul> -->
 			</nav>
 		</header>
-		<main>
+		<main class=editBooks>
 			<h2>Book Attributes:</h2>
 			<form action="/books/<%=book._id%>?_method=PUT" method="post">
 				<input type="text" name="improvement" value="<%=book.improvement%>"/><br/>

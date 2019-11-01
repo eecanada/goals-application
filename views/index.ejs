@@ -1,34 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Goal Loops</title>
-</head>
-<body>
+<%- include('./partials/header.ejs') %>
+<%- include('./partials/navbar.ejs') %>
     <header>
-        <h1>Goal Loops</h1>
+      <div class="login">
+        <!-- <h1>Goal Loops</h1> -->
         <% if(!user) { %> 
           <a href="/login">Login</a>
           <a href="/registration">Register</a>
         <% } else { %> 
           <a href='users/logout'>Log Out</a>
         <% } %> 
+        </div>
         <nav>
           <ul>
-            <li>
+            <!-- <li>
               <a href="/users">User</a>
             </li>
             <li>
               <a href="/books">Books</a>
-            </li>
-
+            </li> -->
           </ul>
         </nav>
-      </header>
-      <header><%= message %></header>
-
+      <div class="box">
+          <img id="first" src="https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1974&q=80" alt="books">
+          <div class="text">
+            <h1>Goals Help People Accomplish</h1>
+          </div>
+      </div>
+      <%= message %>
+    </header>
+    <div class="box2">
+        <h2>Help Yours Happen Now</h2>
+  </div>  
+  <div class="box3">
+      <a class="box3" href="/registration"> Get Started</a>
+      <!-- <a href="/login">Login</a> -->
+      <!-- <h3>Get Started</h3> -->
+</div>  
 
   
 </body>
