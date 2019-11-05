@@ -3,7 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const methodOverride = require('method-override');
 const session = require('express-session');
+require('dotenv').config()
 
+const PORT = process.env.PORT 
 
 
 //controllers
@@ -49,6 +51,6 @@ app.get('/registration', (req,res)=>{
 })
 
 //my server
-app.listen(3000, ()=>{
-  console.log(3000, 'server is listening')
+app.listen(PORT, ()=>{
+  console.log(`running on port ${PORT}`)
 });
