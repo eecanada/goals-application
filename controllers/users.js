@@ -111,10 +111,9 @@ router.post('/registration', async (req, res) => {
 
       const userDbEntry = {};
       userDbEntry.username = req.body.username;
-
-      userDbEntry.password = passwordHash;
       userDbEntry.email    = req.body.email;
-
+      userDbEntry.password = passwordHash;
+    
       const createdUser = await User.create(userDbEntry);
       console.log(createdUser)
       req.session.username = createdUser.username;
