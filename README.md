@@ -30,4 +30,5 @@
 # Next Steps
 * Create categories of self help-books
 * More styling
+* add links to purchase books
 
